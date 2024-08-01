@@ -1,4 +1,4 @@
-import { FolderIcon } from "@heroicons/react/24/solid";
+import { DocumentIcon, FolderIcon } from "@heroicons/react/24/solid";
 import { type TFolder } from "./lib/types";
 
 const folders: TFolder[] = [
@@ -10,14 +10,30 @@ const folders: TFolder[] = [
         folders: [
           {
             label: "Action",
-            folders: [{ label: "2000s", folders: [{ label: "Popular" }] }],
+            folders: [
+              {
+                label: "2000s",
+                folders: [
+                  { label: "Gladiator.mp4" },
+                  { label: "American-beauty.mp4" },
+                ],
+              },
+              { label: "2010s", folders: [] },
+            ],
           },
-          { label: "Comedy", folders: [{ label: "2000s" }] },
+          { label: "Comedy", folders: [{ label: "2000s", folders: [] }] },
         ],
       },
-      { label: "Musics", folders: [{ label: "Rock" }, { label: "Classical" }] },
-      { label: "Pictures" },
-      { label: "Documents" },
+      {
+        label: "Musics",
+        folders: [
+          { label: "Rock", folders: [] },
+          { label: "Classical", folders: [] },
+        ],
+      },
+      { label: "Pictures", folders: [] },
+      { label: "Documents", folders: [] },
+      { label: "password.txt" },
     ],
   },
 ];
@@ -43,7 +59,11 @@ const Folder = ({ folder }: FolderProps) => {
   return (
     <li className="my-1.5" key={folder.label}>
       <span className="flex items-center gap-1.5">
-        <FolderIcon className="size-6 text-sky-500" />
+        {folder.folders ? (
+          <FolderIcon className="size-6 text-sky-500" />
+        ) : (
+          <DocumentIcon className="size-6 text-gray-900" />
+        )}
         {folder.label}
       </span>
 
