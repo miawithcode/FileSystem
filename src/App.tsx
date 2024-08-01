@@ -1,6 +1,7 @@
 import { FolderIcon } from "@heroicons/react/24/solid";
+import { type TFolder } from "./lib/types";
 
-const folders = [
+const folders: TFolder[] = [
   {
     label: "Home",
     folders: [
@@ -34,7 +35,11 @@ const App = () => {
 };
 export default App;
 
-const Folder = ({ folder }) => {
+type FolderProps = {
+  folder: TFolder;
+};
+
+const Folder = ({ folder }: FolderProps) => {
   return (
     <li className="my-1.5" key={folder.label}>
       <span className="flex items-center gap-1.5">
