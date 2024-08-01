@@ -1,6 +1,6 @@
 # Folder
 
-> React Recursive Component
+> React Recursive Component, which component is rendering itself
 
 ## Reference
 
