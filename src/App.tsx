@@ -1,5 +1,7 @@
 import { DocumentIcon, FolderIcon } from "@heroicons/react/24/solid";
 import { type TFolder } from "./lib/types";
+import { ChevronRightIcon } from "@heroicons/react/16/solid";
+import { useState } from "react";
 
 const folders: TFolder[] = [
   {
@@ -56,22 +58,37 @@ type FolderProps = {
 };
 
 const Folder = ({ folder }: FolderProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => [setIsOpen((prev) => !prev)];
+
   return (
     <li className="my-1.5" key={folder.label}>
       <span className="flex items-center gap-1.5">
+        {folder.folders && folder.folders.length > 0 && (
+          <button onClick={handleClick}>
+            <ChevronRightIcon
+              className={`size-4 text-gray-500 ${isOpen && "rotate-90"}`}
+            />
+          </button>
+        )}
         {folder.folders ? (
-          <FolderIcon className="size-6 text-sky-500" />
+          <FolderIcon
+            className={`size-6 text-sky-500 ${!(folder.folders.length > 0) && "ml-[22px]"}`}
+          />
         ) : (
-          <DocumentIcon className="size-6 text-gray-900" />
+          <DocumentIcon className="ml-[22px] size-6 text-gray-900" />
         )}
         {folder.label}
       </span>
 
-      <ul className="pl-6">
-        {folder.folders?.map((folder) => (
-          <Folder folder={folder} key={folder.label} />
-        ))}
-      </ul>
+      {isOpen && (
+        <ul className="pl-6">
+          {folder.folders?.map((folder) => (
+            <Folder folder={folder} key={folder.label} />
+          ))}
+        </ul>
+      )}
     </li>
   );
 };
