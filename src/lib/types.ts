@@ -1,4 +1,4 @@
-export type TFolder = {
+export type Node = {
   label: string;
-  folders?: TFolder[];
+  nodes?: Node[];
 };
